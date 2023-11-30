@@ -1,13 +1,17 @@
 import React from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { HStack, Link as ChakraLink, Button, Image } from "@chakra-ui/react";
+import { logout } from "../Redux/action";
 
 const Navbar = () => {
   const isAuth = useSelector((store) => store.isAuth);
   const avatar = useSelector((store) => store.avatar);
-  const handleLogin = () => {};
-  const handleLogout = () => {};
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <HStack spacing={6} mx={"auto"} w={"20rem"}>
       <ChakraLink as={ReactRouterLink} to="/">
@@ -19,7 +23,13 @@ const Navbar = () => {
           <Button onClick={handleLogout}>Logout</Button>
         </HStack>
       ) : (
-        <Button onClick={handleLogin}>Login</Button>
+        <Button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Login
+        </Button>
       )}
     </HStack>
   );

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/action.js";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,8 +25,8 @@ const Login = () => {
   const handleSubmit = () => {
     dispatch(login({ email, password }))
       .then(() => {
-        navigate("/forum");
         alert("login successful");
+        navigate("/forum");
       })
       .catch(() => {
         alert("login failed");
